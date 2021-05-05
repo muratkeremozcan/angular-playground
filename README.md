@@ -10,7 +10,7 @@ Improvements over the base application include:
 * Linters and pre-commit hooks: Eslint, Prettier, Js-beautify, Husky
 
 
-Clone, cd in, `yarn && yarn test`.
+Clone, cd in, `npm i && npm run test`.
 
 
 <br></br>
@@ -163,7 +163,7 @@ Build in prod mode and locally test utilizing [`http-server`](https://www.npmjs.
   ```bash
   ng build --prod
 
-  yarn global add http-server
+  npm i -g http-server
 
   http-server -p 8080 -c-1 dist/angular-unit-testing    ## -c-1 disables caching
   ```
@@ -256,9 +256,9 @@ Personally I do not utilize them. So I remove the "e2e", "cypress-run" and "cypr
 
 ### Start Cypress
 
-Serve your app with `yarn start` and on another tab start Cypress with `yarn cypress:open`. 
+Serve your app with `npm run start` and on another tab start Cypress with `npm run cypress:open`. 
 
-To execute the tests in CI or without the test runner UI locally, use `yarn cypress:run`. 
+To execute the tests in CI or without the test runner UI locally, use `npm run cypress:run`. 
 
 </details>
 
@@ -276,9 +276,9 @@ To execute the tests in CI or without the test runner UI locally, use `yarn cypr
   },
   ```
 
-* `yarn add -D star-server-and-test` . [start-server-and-test](https://www.npmjs.com/package/start-server-and-test) makes it easy to spin a localhost in CI and run e2e against it. 
+* `npm i -D star-server-and-test` . [start-server-and-test](https://www.npmjs.com/package/start-server-and-test) makes it easy to spin a localhost in CI and run e2e against it. 
   
-  Locally try out the script `yarn easy` to see it serve localhost and then open cypress.
+  Locally try out the script `npm run easy` to see it serve localhost and then open cypress.
 
   In CI we use a version of it:
 
@@ -286,7 +286,7 @@ To execute the tests in CI or without the test runner UI locally, use `yarn cypr
   # spins up a local UI server, waits for it to start, executes Cypress tests against localhost, stops the server
     script:
       - >
-          yarn server-test start http://localhost:4200
+          npm run server-test start http://localhost:4200
           'cypress run --record --parallel --browser chrome --group local --tag 'branch' --config-file cypress/config/local.json'
 
   ```
@@ -298,8 +298,8 @@ To execute the tests in CI or without the test runner UI locally, use `yarn cypr
   * On the upper right use Login to login the dashboard https://dashboard.cypress.io/login . I use GitHub.
   * Connect to Dashboard and create a project.
   * From here on, Cypress docs are excellent. But, effectively all you need is to set the projectId in `cypress.json` and/or the config files (`"projectId": "4mhoqq"`) and use the record key.
-  * Test a recording locally `yarn cypress run --record --key 29b708ae-6839-4446-8d68-d93ad6ca81f9`
-  * [As advised in the docs](https://docs.cypress.io/guides/guides/command-line#cypress-run) set the key as an environment variable in CI (already done in CI, but not in your local environment, obviously). If you set this env var locally, you can omit the key parameter: `yarn cypress run --record ` 
+  * Test a recording locally `npx cypress run --record --key 29b708ae-6839-4446-8d68-d93ad6ca81f9`
+  * [As advised in the docs](https://docs.cypress.io/guides/guides/command-line#cypress-run) set the key as an environment variable in CI (already done in CI, but not in your local environment, obviously). If you set this env var locally, you can omit the key parameter: `npx cypress run --record ` 
   * You can view all the runs at the [dashboard](https://dashboard.cypress.io/projects/4mhoqq/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&timeRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D) since this is a public project.
 
 </details>
@@ -330,10 +330,10 @@ Follow the [blog post](https://dev.to/muratkeremozcan/combined-unit-e2e-code-cov
   # generates a new ESLint file based on the contents of your project’s existing TSLint config. Mileage can vary.
   ng g @angular-eslint/schematics:convert-tslint-to-eslint
   # get some of the recommended plugins
-  yarn add -D eslint-plugin-import eslint-plugin-jsdoc eslint-plugin-prefer-arrow eslint-plugin-cypress eslint-plugin-jest
+  npm i -D eslint-plugin-import eslint-plugin-jsdoc eslint-plugin-prefer-arrow eslint-plugin-cypress eslint-plugin-jest
   # remove tslint   
-  yarn remove codelyzer
-  yarn remove tslint # if it's still in package.json
+  npm remove codelyzer
+  npm remove tslint # if it's still in package.json
   # remove tslint.json file 
   ```
 
@@ -439,7 +439,7 @@ Follow the [blog post](https://dev.to/muratkeremozcan/combined-unit-e2e-code-cov
 
 ### Setup [prettier](https://www.npmjs.com/package/prettier) code formatter
 
-`yarn add -D prettier eslint-config-prettier eslint-plugin-prettier`
+`npm i -D prettier eslint-config-prettier eslint-plugin-prettier`
 
 You can find recommended configurations for  `.prettierrc.js`, `prettierignore` and `.vscode/settings.json` files in the final version of the repository.
 
@@ -462,13 +462,13 @@ Now if we run ESLint with --fix flag, it will use Prettier to auto format code, 
 
 ### Setup [js-beautify](https://www.npmjs.com/package/js-beautify) for css and or html
 
-`yarn add -D js-beautify`
+`npm i -D js-beautify`
 
 Create a `.jsbeautifyrc` file. You can find recommended configurations for the file in the final version of the repository.
 
 Get the [vscode extension](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify).
 
-Enhance package.json `"lint": "ng lint --fix && yarn js-beautify src/**/*.css"`
+Enhance package.json `"lint": "ng lint --fix && npx js-beautify src/**/*.css"`
 
 
 ### Setup [stylelint](https://stylelint.io/) for css (optional)
@@ -477,7 +477,7 @@ Enhance package.json `"lint": "ng lint --fix && yarn js-beautify src/**/*.css"`
 
 Helps you avoid errors and enforce conventions in your styles.
 
-`yarn add -D stylelint stylelint-config-standard`
+`npm i -D stylelint stylelint-config-standard`
 
 * Create a `.stylelintrc.json` configuration file in the root of your project:
   ```json
@@ -486,7 +486,7 @@ Helps you avoid errors and enforce conventions in your styles.
   }
   ```
 
-* Optionally enhance the package.json lint script as: `"lint": "ng lint --fix && yarn stylelint **.css`.
+* Optionally enhance the package.json lint script as: `"lint": "ng lint --fix && npx stylelint **.css`.
 
 ### Setup husky pre-commit hook
 
@@ -494,14 +494,14 @@ Can execute lint and unit test prior to git push.
 
 > To skip pre-commit hooks, use -n / --no-verify commit message modifier.
 
-`yarn add -D husky`
+`npm i -D husky`
 
 Add to package.json the pre-commit hook
 
 ```json
 "husky": {
   "hooks": {
-    "pre-commit": "yarn lint && yarn test"
+    "pre-commit": "npm run lint && npm run test"
   }
 }
 ```
@@ -510,8 +510,8 @@ If husky is not working on commit:
 
 ```bash
 rm -rf .git/hooks/
-yarn remove husky
-yarn add -D husky
+npm remove husky
+npm i -D husky
 ```
 
 If still does not work, use an older version of husky, like the one in this repo's package.json.

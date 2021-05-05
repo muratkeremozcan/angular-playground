@@ -13,7 +13,7 @@
     "cypress:open": "cypress open --config-file cypress/config/local.json",
     "cypress:run": "cypress run --config-file cypress/config/local.json",
     "easy": "server-test start http://localhost:4200 cypress:open",
-    "easy:ci": "server-test start http://localhost:8080 cypress run --record --parallel --browser chrome --group local --tag 'branch' --config-file cypress/config/local.json",
+    "easy:ci": "server-test start http://localhost:4200 cypress run --record --parallel --browser chrome --group local --tag 'branch' --config-file cypress/config/local.json",
     "coverage:combined": "yarn copy:reports && yarn combine:reports && yarn finalize:combined-report",
     "copy:reports": "(mkdir reports || true) && cp coverage-e2e/coverage-final.json reports/from-cypress.json && cp coverage/coverage-final.json reports/from-jest.json",
     "combine:reports": "npx nyc merge reports && mv coverage.json .nyc_output/out.json",

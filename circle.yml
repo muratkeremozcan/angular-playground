@@ -91,6 +91,7 @@ workflows:
           executor: latest
           pre-steps:
             - run: npm config set unsafe-perm true
+          command: npm test # runs unit tests
 
       - cypress/run:
           requires:
@@ -99,7 +100,7 @@ workflows:
           parallel: true
           parallelism: 2
           no-workspace: true
-          start: npx easy:ci
+          start: npm run easy:ci
           record: true
           # post-steps:
           #   - store_artifacts:
