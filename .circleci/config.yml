@@ -100,7 +100,7 @@ workflows:
           parallel: true
           parallelism: 2
           no-workspace: true
-          start: yarn cypress:run
+          start: yarn server-test start http://localhost:4200 cypress run --record --parallel --browser chrome --group local --tag 'branch' --config-file cypress/config/local.json
           wait-on: http://localhost:4200
           record: true
           yarn: true
