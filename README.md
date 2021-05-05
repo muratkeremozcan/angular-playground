@@ -12,7 +12,6 @@ Improvements over the base application include:
 
 Clone, cd in, `yarn && yarn test`.
 
-The repo is the most recent state of the app, and you can check out branches that build up to each step in order to self-reproduce and learn the improvement process.
 
 <br></br>
 
@@ -97,7 +96,6 @@ If using Spectator, `npm i -D @ngneat/spectator`. In the spec files change `impo
 
 <br></br>
 
-To start from scratch and migrate to PWA yourself, check out the branch `base-app`. This is a non-PWA version of the app.
 <details><summary>PWA migration</summary>
 
 
@@ -192,7 +190,6 @@ Devtools > Application tab > and choose Service Workers on the left. You should 
 
 <br></br>
 
-To start from the previous state and setup Cypress yourself, check out the branch `pre-cypress`.
 <details><summary>Setup Cypress</summary>
 
 
@@ -267,7 +264,6 @@ To execute the tests in CI or without the test runner UI locally, use `yarn cypr
 
 <br></br>
 
-To start from the previous state and setup CI yourself, check out the branch `pre-ci`
 <details><summary>Setup CI</summary>
 
 ## CI
@@ -310,7 +306,6 @@ To start from the previous state and setup CI yourself, check out the branch `pr
 
 <br></br>
 
-To start from previous state and setup combined coverage yourself, check out the branch `pre-combined-cov`.
 <details><summary> Setup Combined Coverage</summary>
 
 Follow the [blog post](https://dev.to/muratkeremozcan/combined-unit-e2e-code-coverage-case-study-on-a-real-life-system-using-angular-jest-cypress-gitlab-35nk) for a detailed walk-through of combined code coverage setup.
@@ -318,7 +313,6 @@ Follow the [blog post](https://dev.to/muratkeremozcan/combined-unit-e2e-code-cov
 
 <br></br>
 
-To start from previous state and setup eslint, prettier, beautify and husky yourself, check out the branch `pre-lint`.
 
 <details><summary>Setup lint</summary>
 
