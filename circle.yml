@@ -91,7 +91,6 @@ workflows:
           executor: latest
           pre-steps:
             - run: npm config set unsafe-perm true
-          yarn: true
 
       - cypress/run:
           requires:
@@ -100,10 +99,8 @@ workflows:
           parallel: true
           parallelism: 2
           no-workspace: true
-          start: yarn cypress:run
-          wait-on: http://localhost:4200
+          start: npx easy:ci
           record: true
-          yarn: true
           # post-steps:
           #   - store_artifacts:
           #       path: coverage
