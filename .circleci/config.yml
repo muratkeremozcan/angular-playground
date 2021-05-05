@@ -1,3 +1,5 @@
+# Converting the original GitLab yml to CircleCI is WIP
+
 # see orb options at
 # https://github.com/cypress-io/circleci-orb
 version: 2.1
@@ -89,6 +91,7 @@ workflows:
           executor: latest
           pre-steps:
             - run: npm config set unsafe-perm true
+          yarn: true
 
       - cypress/run:
           requires:
@@ -100,6 +103,7 @@ workflows:
           start: yarn cypress:run
           wait-on: http://localhost:4200
           record: true
+          yarn: true
           # post-steps:
           #   - store_artifacts:
           #       path: coverage
