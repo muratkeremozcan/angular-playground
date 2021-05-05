@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[2] Testing Services by themselves Testing a service by itself: (2.1) setup the service, (2.2) use the service (2.3) use waitForAsync() or fakeAsync() pattern for testing promises or observables waitForAsync() way (I prefer this)  waitForAsync() : ValueService.getPromiseValue 1`] = `"promise value"`;
+
+exports[`[2] Testing Services by themselves Testing a service with a service dependency: (2.4.0) KEY: with spectator, you can fully mock the dependency using the mocks property,
+  (2.4.1) inject the service under test and the mock dependency (2.4.2) stub the external service's return value, and exercise the main service under test 1`] = `"stub value"`;
+
+exports[`[2] Testing Services by themselves ngMocks MockProvider comparison (2.4.2) stub the external service's return value, and exercise the main service under test 1`] = `"stub value"`;

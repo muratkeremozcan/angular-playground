@@ -1,0 +1,5 @@
+{
+  "baseUrl": "http://localhost:4200",
+  "extends": "../../cypress.json",
+  "projectId": "4mhoqq"
+}

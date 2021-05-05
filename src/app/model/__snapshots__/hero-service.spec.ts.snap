@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[3] Testing Http GET requests (3.2.2) initiate the client request and setup the assertion that will happen,(3.2.3) match the url w/ spectator.expectOne, (3.2.4) flush the response and assert that the set value matches the expected value 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "name": "A",
+  },
+  Object {
+    "id": 2,
+    "name": "B",
+  },
+]
+`;
+
+exports[`[3] Testing Http GET requests (3.4) in error testing, define the error response and bypass the success 1`] = `"getHeroes failed: server returned code 404 with body \\"Deliberate 404\\""`;
+
+exports[`[3] Testing Http PUT requests (3.6) testing PUTs: test the method type and request body that is going out from the client 1`] = `
+Object {
+  "id": 1,
+  "name": "A",
+}
+`;
+
+exports[`[3] Testing Http PUT requests cover the Error Case, same as the GET scenario in (3.4) 1`] = `"updateHero failed: server returned code 404 with body \\"Deliberate 404\\""`;

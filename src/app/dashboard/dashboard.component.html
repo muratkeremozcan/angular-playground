@@ -1,0 +1,16 @@
+<h2 highlight>{{title}}</h2>
+
+<div class="grid grid-pad qa-heroes">
+  <dashboard-hero *ngFor="let hero of heroes"
+                  class="col-1-4 qa-hero-list-item"
+                  [hero]=hero
+                  (selected)="gotoDetail($event)">
+  </dashboard-hero>
+</div>
+
+
+<!--
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

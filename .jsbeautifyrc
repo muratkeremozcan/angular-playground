@@ -1,0 +1,22 @@
+{
+  "indent_size": 2,
+  "indent_char": " ",
+  "css": {
+    "fileTypes": [".scss", ".sass", ".less"],
+    "end_with_newline": true,
+    "indent_char": " ",
+    "indent_size": 2,
+    "selector_separator": " ",
+    "selector_separator_newline": false,
+    "space_around_combinator": true
+  },
+  "html": {
+    "wrap_attributes": "force-aligned",
+    "end_with_newline": true,
+    "indent_size": 2,
+    "indent_scripts": "keep",
+    "preserve_newlines": true,
+    "indent_inner_html": false,
+    "unformatted": ["meta", "html"]
+  }
+}

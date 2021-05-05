@@ -1,0 +1,52 @@
+include:
+  - local: "/cypress/.gitlab-ci-tests.yml"
+
+image: node:14.16.0-alpine3.13
+
+# any job has pull cache policy, unless specified by cache: {}
+cache:
+  untracked: true
+  key: ${CI_COMMIT_REF_SLUG} # we use per branch caching
+  paths: [node_modules/]
+  policy: pull
+
+
+stages:
+  - build
+  - test
+  - e2e
+  - combined-coverage-report
+
+
+build-job:
+  stage: build
+  script:
+    - yarn config set registry https://devops.bt.siemens.com/artifactory/api/npm/npm-all
+    - yarn install --frozen-lockfile --prefer-offline
+  tags: [AWS, CLOUD, DEV, DOCKER, HO, HORIZON, INTERNAL, NOPROXY]
+  cache:
+    key: ${CI_COMMIT_REF_SLUG} # we use per branch caching
+    paths: [node_modules/]
+    policy: pull-push  # only the build job has the additional push policy on cache, becauase the subsequent stages need it
+
+
+unit-test:
+  stage: test
+  before_script:
+   - yarn coverage:reset # reset state at the beginning for new unit + e2e coverage evaluation
+  script: [yarn test]
+  tags: [AWS, CLOUD, DEV, DOCKER, HO, HORIZON, INTERNAL, NOPROXY]
+  artifacts:
+    paths: [coverage/]
+  retry:
+    max: 2
+    when: runner_system_failure
+
+
+lint:
+  stage: test
+  script: [yarn lint]
+  tags: [AWS, CLOUD, DEV, DOCKER, HO, HORIZON, INTERNAL, NOPROXY]
+  retry:
+    max: 2
+    when: runner_system_failure

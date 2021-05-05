@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeroDetailService getHero getHero with fakeAsync alternative 1`] = `
+Object {
+  "id": 1,
+  "name": "abc",
+}
+`;
+
+exports[`HeroDetailService getHero getHero with waitForAsync 1`] = `
+Object {
+  "id": 1,
+  "name": "abc",
+}
+`;
+
+exports[`HeroDetailService getHero getHero with waitForAsync, cover the parseInt line 1`] = `
+Object {
+  "id": 1,
+  "name": "abc",
+}
+`;
+
+exports[`HeroDetailService sanity 1`] = `
+HeroDetailService {
+  "heroService": Object {
+    "addHero": [MockFunction],
+    "castToWritable": [Function],
+    "deleteHero": [MockFunction],
+    "getHero": [MockFunction],
+    "getHeroes": [MockFunction],
+    "handleError": [MockFunction],
+    "log": [MockFunction],
+    "updateHero": [MockFunction],
+  },
+}
+`;
+
+exports[`HeroDetailService saveHero saveHero with fakeAsync 1`] = `null`;
+
+exports[`HeroDetailService saveHero saveHero with waitForAsync 1`] = `null`;

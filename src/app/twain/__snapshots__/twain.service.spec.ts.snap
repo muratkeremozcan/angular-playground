@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TwainService should getQuote 1`] = `
+Object {
+  "id": 1,
+  "quote": "abc",
+}
+`;

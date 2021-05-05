@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserService should create the service 1`] = `
+UserService {
+  "isLoggedIn": true,
+  "user": Object {
+    "name": "Sam Spade",
+  },
+}
+`;

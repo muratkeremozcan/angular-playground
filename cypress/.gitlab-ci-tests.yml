@@ -1,0 +1,83 @@
+variables:
+  # parallelelization and recording are common in every Cypress job
+  CYPRESS_RUN_PARALLEL: 'cypress run --record --parallel'
+
+# these are properties that are common in every Cypress job
+.branch_template: &common
+  image:
+    name: cypress/included:7.2.0
+    entrypoint: [""]
+  artifacts:
+    expire_in: 1 week
+    when: always
+    paths:
+      # Cypress generates screenshots on failures only
+      - cypress/screenshots
+      - cypress/videos
+  retry:
+    max: 2
+    when: runner_system_failure
+  tags: [AWS, CLOUD, DEV, DOCKER, HO, HORIZON, INTERNAL, NOPROXY]
+  # makes it so that subsequent pipelines for the same branch cancels the older pipeline
+  interruptible: true
+
+
+# extends the LOCAL Deploy job from the template. Spins up a localhost in CI and executes tests against it
+.localhost_template: &localhost
+  # acyclic: start as soon as unit-test job passes, without having to wait for the rest of the stage to complete.
+  needs: ["unit-test"]
+  <<: *common
+  stage: e2e
+  # spins up a local UI server, waits for it to start, executes Cypress tests against localhost, stops the server
+  script:
+    - >
+        yarn server-test start http://localhost:4200
+        '$CYPRESS_RUN_PARALLEL --browser chrome --group local --tag 'branch' --config-file cypress/config/local.json'
+  after_script:
+    # after the job, copy the e2e coverage for the parallel job to coverage-part folder
+    # for the file name, use unique job id to avoid overwriting the e2e coverage file
+    - (mkdir coverage-part || true) && cp coverage-e2e/coverage-final.json coverage-part/parallel-job-${CI_JOB_ID}.json
+  artifacts:
+    paths:
+      - coverage-part/
+
+# parallel jobs
+localhost-1:
+  <<: *localhost
+  resource_group: test-job-1 # the intent is this: when 2 pipelines run and they both want to run these tests, the pipeline that comes later should wait for the initial set of jobs to finish. Less load on the runner this way
+localhost-2:
+  <<: *localhost
+  resource_group: test-job-2
+
+
+# (1) copy all coverage-part/*.json files into reports folder. This mirrors the local copy:reports script in package.json, but instead collects coverage from the parallel e2e jobs.
+# (2) combine the reports (same as the local script in package.json)
+# (3) finalize the combined report (same as the local script in package.json)
+# (4) save it as an artifact
+collect-combined-coverage:
+  stage: combined-coverage-report
+  needs: ["localhost-1", "localhost-2", "unit-test"]
+  before_script:
+    - |
+      echo coverage-part/ contents are:
+      ls coverage-part
+      echo coverage/ contents are:
+      ls coverage
+      mkdir reports
+      cp -r coverage-part/. reports
+      cp coverage/coverage-final.json reports/from-jest.json
+      echo reports/ contents are:
+      ls reports
+  script:
+    - |
+      yarn combine:reports
+      test -f .nyc_output/out.json && echo ".nyc_output/out.json exists."
+      yarn finalize:combined-report
+      yarn coverage:check
+      cp combined-coverage/coverage-summary.json coverage/coverage-summary.json
+  artifacts:
+    paths:
+      - combined-coverage/
+  interruptible: true
+  tags: [AWS, CLOUD, DEV, DOCKER, HO, HORIZON, INTERNAL, NOPROXY]
+  allow_failure: true # give a warning instead of blocking the pipeline

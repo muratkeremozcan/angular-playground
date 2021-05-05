@@ -1,0 +1,5 @@
+# Files for Prettier to ignore.
+*.html
+package.json
+*.scss
+*.css

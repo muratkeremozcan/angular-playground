@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Canvas component should check child component @ViewChild 1`] = `
+<div
+  id="root1"
+>
+  <canvas
+    height="200"
+    width="200"
+  />
+</div>
+`;

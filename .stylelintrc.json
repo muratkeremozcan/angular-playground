@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "max-nesting-depth": null,
+    "selector-no-qualifying-type": null,
+    "selector-max-compound-selectors": null,
+    "scss/selector-no-redundant-nesting-selector": null,
+    "color-named": null,
+    "property-no-vendor-prefix": null,
+    "order/properties-alphabetical-order": null,
+    "value-no-vendor-prefix": null,
+    "rule-empty-line-before": null
+  }
+}
