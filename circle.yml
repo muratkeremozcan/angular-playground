@@ -91,7 +91,6 @@ workflows:
           executor: latest
           pre-steps:
             - run: npm config set unsafe-perm true
-          command: npm test # runs unit tests
 
       - cypress/run:
           requires:
