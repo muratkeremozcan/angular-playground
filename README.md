@@ -1,6 +1,6 @@
 This repo is a copy of Angular's Karma examples, enhanced for innovation activities, best practices and information sharing.
 
-> Originally the repository uses GitLab. Converting the CI architecture to CircleCI is WIP.
+Originally the repository was Siemens internal and used  GitLab. It got migrated to Github and CircleCI, but the gitlab files have been left-in for a reference. Technically, this repo can be dropped in at gitlab.com and it would work, granted the runner tags are modified.
 
 Improvements over the base application include:
 
