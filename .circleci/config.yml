@@ -56,12 +56,15 @@ commands:
     steps:
       - run: ls -la .
       - run: ls -la coverage-part || true
-      - run: npx nyc merge coverage-part
+      - run : mkdir reports
+      - run : cp -r coverage-part/. reports
+      - run : cp coverage/coverage-final.json reports/from-jest.json
+      - run : cp coverage-e2e/coverage-final.json reports/from-cypress.json
+      - run : cp coverage/coverage-final.json reports/from-jest.json
+      - run: npx nyc merge reports
       - run: mkdir .nyc_output || true
-      # storing the combined report in ".nyc_output/out.json"
-      # allows other NYC commands to find it right away
       - run: mv coverage.json .nyc_output/out.json
-      - run: ls -la .nyc_output
+
 
 jobs:
   merge-coverage:
