@@ -79,13 +79,6 @@ jobs:
               --report-dir combined-coverage
       - store_artifacts:
           path: combined-coverage
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            # note that the current folder is "project"
-            # so we need to save the full path correctly
-            # otherwise the files will not be restored in the expected location
-            - 'project/combined-coverage/*'
 
 
 workflows:
