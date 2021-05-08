@@ -89,8 +89,7 @@ workflows:
     jobs:
       - cypress/install:
           executor: latest
-          steps:
-            - run: npm ci
+          install-command: npm ci
           post-steps:
             - run:
                 name: Run lint
@@ -111,7 +110,7 @@ workflows:
           parallelism: 2
           no-workspace: true
           group: 'all tests'
-          start: npm run start:ci
+          start: npm start
           post-steps:
             - store_artifacts:
                 path: coverage-e2e
