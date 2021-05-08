@@ -8,6 +8,7 @@ Improvements over the base application include:
 * CI setup
 * Combined coverage with Jest and Cypress, including CI
 * Linters and pre-commit hooks: Eslint, Prettier, Js-beautify, Husky
+* The app has been deployed to AWS S3 as a static website, e2e tests can run against this deployment
 
 
 Clone, cd in.
