@@ -27,6 +27,10 @@ variables:
   # acyclic: start as soon as unit-test job passes, without having to wait for the rest of the stage to complete.
   needs: ["unit-test"]
   <<: *common
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "master"'
+    when: never
+  - if: $CI_COMMIT_BRANCH
   stage: e2e
   # spins up a local UI server, waits for it to start, executes Cypress tests against localhost, stops the server
   script:
@@ -47,6 +51,25 @@ localhost-1:
   resource_group: test-job-1 # the intent is this: when 2 pipelines run and they both want to run these tests, the pipeline that comes later should wait for the initial set of jobs to finish. Less load on the runner this way
 localhost-2:
   <<: *localhost
+  resource_group: test-job-2
+
+
+# runs tests against master / development url
+.dev_template: &dev
+  <<: *common
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "master"'
+  - if: $CI_COMMIT_BRANCH
+    when: never
+  stage: e2e
+  script:
+    - yarn $CYPRESS_RUN_PARALLEL --browser chrome --group dev --tag 'dev' --config-file cypress/config/dev.json
+
+dev-1:
+  <<: *dev
+  resource_group: test-job-1
+dev-2:
+  <<: *dev
   resource_group: test-job-2
 
 
@@ -81,3 +104,7 @@ collect-combined-coverage:
   interruptible: true
   tags: [AWS, CLOUD, DEV, DOCKER, HO, HORIZON, INTERNAL, NOPROXY]
   allow_failure: true # give a warning instead of blocking the pipeline
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "master"'
+    when: never
+  - if: $CI_COMMIT_BRANCH

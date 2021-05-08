@@ -41,6 +41,10 @@ unit-test:
   retry:
     max: 2
     when: runner_system_failure
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "master"'
+    when: never
+  - if: $CI_COMMIT_BRANCH
 
 
 lint:
@@ -50,3 +54,7 @@ lint:
   retry:
     max: 2
     when: runner_system_failure
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "master"'
+    when: never
+  - if: $CI_COMMIT_BRANCH

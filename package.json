@@ -11,6 +11,7 @@
     "test:watch": "jest --watch",
     "lint": "ng lint --fix && yarn js-beautify src/**/*.css && yarn js-beautify src/**/*.html",
     "cypress:open": "cypress open --config-file cypress/config/local.json",
+    "cypress:open-dev": "cypress open --config-file cypress/config/dev.json",
     "cypress:run": "cypress run --config-file cypress/config/local.json",
     "easy": "server-test start http://localhost:4200 cypress:open",
     "easy:ci": "server-test start http://localhost:4200 cypress run --record --parallel --browser chrome --group local --tag 'branch' --config-file cypress/config/local.json",
