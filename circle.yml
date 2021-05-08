@@ -101,11 +101,6 @@ workflows:
               command: npm run lint
             - store_artifacts:
                 path: coverage
-          # if this machine had no tests to run
-          # there will be no coverage report
-            # - run: npx nyc report --reporter=text || true
-            # - save-partial-coverage-report:
-            #     label: e2e
 
       - cypress/run:
           name: 'e2e'
@@ -122,6 +117,7 @@ workflows:
           post-steps:
             - store_artifacts:
                 path: coverage-e2e
+
           #   # if this machine had no tests to run
           #   # there will be no coverage report
           #   - run: npx nyc report --reporter=text || true
