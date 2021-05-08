@@ -1,5 +1,7 @@
 This repo is a copy of Angular's Karma examples, enhanced for innovation activities, best practices and information sharing.
 
+> Originally the repository uses GitLab. Converting the CI architecture to CircleCI is WIP.
+
 Improvements over the base application include:
 
 * Migration from Karma to Spectator & Jest, showcasing patterns of unit testing in Angular
