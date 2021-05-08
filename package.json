@@ -14,7 +14,6 @@
     "cypress:open-dev": "cypress open --config-file cypress/config/dev.json",
     "cypress:run": "cypress run --config-file cypress/config/local.json",
     "easy": "server-test start http://localhost:4200 cypress:open",
-    "start:ci": "server-test start http://localhost:4200",
     "coverage:combined": "yarn copy:reports && yarn combine:reports && yarn finalize:combined-report",
     "copy:reports": "(mkdir reports || true) && cp coverage-e2e/coverage-final.json reports/from-cypress.json && cp coverage/coverage-final.json reports/from-jest.json",
     "combine:reports": "npx nyc merge reports && mv coverage.json .nyc_output/out.json",
