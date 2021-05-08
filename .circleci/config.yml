@@ -4,7 +4,7 @@
 # https://github.com/cypress-io/circleci-orb
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.28
+  cypress: cypress-io/cypress@1.27.0
 
 executors:
   latest:
@@ -88,24 +88,21 @@ workflows:
   build:
     jobs:
       - cypress/install:
-          name: "build lint unit test"
           executor: latest
-          pre-steps:
-            - run: npm config set unsafe-perm true
+          install-command: npm ci
           post-steps:
             - run:
-              name: Run Lint
-              command: npm run test
+                name: Run lint
+                command: npm run lint
             - run:
-              name: Run Unit Tests
-              command: npm run lint
+                name: Run Unit Tests
+                command: npm run test
             - store_artifacts:
                 path: coverage
 
       - cypress/run:
-          name: 'e2e'
           requires:
-            - build lint unit test
+            - cypress/install
           browser: chrome
           executor: latest
           record: true
@@ -113,7 +110,8 @@ workflows:
           parallelism: 2
           no-workspace: true
           group: 'all tests'
-          start: npm run start:ci
+          start: npm start
+          wait-on: 'http://localhost:4200'
           post-steps:
             - store_artifacts:
                 path: coverage-e2e
