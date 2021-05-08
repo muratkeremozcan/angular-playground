@@ -80,7 +80,6 @@ jobs:
       - store_artifacts:
           path: combined-coverage
 
-
 workflows:
   build:
     jobs:
@@ -95,7 +94,7 @@ workflows:
                 name: Run Unit Tests
                 command: npm run test
             - store_artifacts:
-                path: coverage-unit
+                path: coverage
 
       - cypress/run:
           requires:
