@@ -89,6 +89,8 @@ workflows:
     jobs:
       - cypress/install:
           executor: latest
+          steps:
+            - run: npm ci
           post-steps:
             - run:
                 name: Run lint
