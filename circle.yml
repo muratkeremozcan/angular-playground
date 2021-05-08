@@ -88,22 +88,40 @@ workflows:
   build:
     jobs:
       - cypress/install:
+          name: "build lint unit test"
           executor: latest
           pre-steps:
             - run: npm config set unsafe-perm true
+          post-steps:
+            - run:
+              name: Run Lint
+              command: npm run test
+            - run:
+              name: Run Unit Tests
+              command: npm run lint
+            - store_artifacts:
+                path: coverage
+          # if this machine had no tests to run
+          # there will be no coverage report
+            # - run: npx nyc report --reporter=text || true
+            # - save-partial-coverage-report:
+            #     label: e2e
 
       - cypress/run:
+          name: 'e2e'
           requires:
-            - cypress/install
+            - build lint unit test
+          browser: chrome
           executor: latest
+          record: true
           parallel: true
           parallelism: 2
           no-workspace: true
-          start: npm run easy:ci
-          record: true
-          # post-steps:
-          #   - store_artifacts:
-          #       path: coverage
+          group: 'all tests'
+          start: npm run start:ci
+          post-steps:
+            - store_artifacts:
+                path: coverage-e2e
           #   # if this machine had no tests to run
           #   # there will be no coverage report
           #   - run: npx nyc report --reporter=text || true
