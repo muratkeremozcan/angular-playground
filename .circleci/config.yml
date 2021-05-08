@@ -111,6 +111,7 @@ workflows:
           no-workspace: true
           group: 'all tests'
           start: npm start
+          wait-on: 'http://localhost:4200'
           post-steps:
             - store_artifacts:
                 path: coverage-e2e
