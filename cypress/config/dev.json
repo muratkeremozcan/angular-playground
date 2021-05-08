@@ -1,5 +1,5 @@
 {
   "extends": "../../cypress.json",
-  "baseUrl": "https://your-deployed-app.com",
+  "baseUrl": "https://d1kaucldkbcik4.cloudfront.net",
   "projectId": "4mhoqq"
 }

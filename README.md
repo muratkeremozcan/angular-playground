@@ -10,7 +10,20 @@ Improvements over the base application include:
 * Linters and pre-commit hooks: Eslint, Prettier, Js-beautify, Husky
 
 
-Clone, cd in, `npm i && npm run test`.
+Clone, cd in.
+
+```bash
+npm i       # installs 
+npm start   # serves 
+
+# on another tab
+
+npm run test  # runs unit tests
+npm run lint  # lints & fixes ts, css, html
+npm run cypress:open       # starts cypress test runner against served app at localhost:4200
+npm run cypress:run        # runs cypress tests headed against served app
+npm run cypress:open-dev   # starts cypress test runner against deployed s3 static site at https://d1kaucldkbcik4.cloudfront.net
+```
 
 
 <br></br>
@@ -516,5 +529,71 @@ npm i -D husky
 
 If still does not work, use an older version of husky, like the one in this repo's package.json.
 
+
+</details>
+
+<br></br>
+
+<details><summary>Deploy the Angular single page app to AWS S3 as a static website</summary>
+
+```                    +----+     +------------+
+Compiled angular -> | S3 | <-> | CloudFront |  <--> Internet
+  (/dist folder)    +----+     +------------+
+```
+[(*source*)](https://medium.com/@peatiscoding/here-is-how-easy-it-is-to-deploy-an-angular-spa-single-page-app-as-a-static-website-using-s3-and-6aa446db38ef)
+
+*"You can use Amazon S3 to host a static website. On a static website, individual webpages include static content, in contrast to a dynamic website which relies on server-side processing."*
+
+1. Locally, run `ng build --prod` to populate your app's dist folder; ex: `dist/angular-unit-testing`.
+
+2. Log in to your AWS account and nav to [S3 console](https://s3.console.aws.amazon.com/s3/home).
+
+3. Create a bucket. Enter a bucket name (ex: `angular-cypress-jest-playground`), and select an AWS Region (ex: `us-east-1`).
+
+4. Unblock all public access. The default is Block *all* public access. The other settings are optional, in this repo's workflow they have been skipped.
+
+5. At your bucket default view (Amazon S3 > angular-cypress-jest-playground > Objects) click upload, Add files, and select the files at your app's dist folder (i.e. `dist/angular-unit-testing`).
+
+6. Under Permissions, choose *Grant public-read access*. All the other settings are optional. Hit Upload and wait a few seconds. Then you can Close the view and get back to Amazon S3 > angular-cypress-jest-playground > Objects.
+
+7. Nav to Properties tab (Amazon S3 > angular-cypress-jest-playground > Properties). At the bottom, Edit **Static website hosting** and Enable it. For both **Index document** and **Error document** enter `index.html`.
+
+You should be able to access your site at `http://<bucket-name>.s3-website-<region>.amazonaws.com` , or namely http://angular-cypress-jest-playground.s3-website-us-east-1.amazonaws.com
+
+### Important note about setting **Error document** to `index.html`
+Choosing `index.html` for **Error document** is a hacky way of getting around errors that would happen when using Angular's routing mechanism. For example, do not set **Error Document**, go to the url, and then copy paste a route to the browser (ex: http://angular-cypress-jest-playground.s3-website-us-east-1.amazonaws.com/heroes/15). You will get a 403 forbidden error, which you would not see if you were locally serving your application.
+
+
+### Make it better by using CloudFront
+
+CloudFront is a content delivery network. *"When a user requests content that you're serving with CloudFront the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance"*.
+
+We can configure CloudFrount so that whenever S3 replies with 403 or 404, we return content from `index.html` and respond with status 200.
+
+
+1. Go to CloudFront Console > Create new Distribution > Get Started. You should be at *Create Distribution form*.
+
+2. Origin Domain name: select the s3 bucket we created `angular-cypress-jest-playground.s3.amazonaws.com`
+
+3. Default Cache Behavior Settings > Allowed HTTP Methods: select Redirect HTTP to HTTPS
+
+4. (optional) Distribution Settings > Alternate Domain Names : you can pick a name here for example just `angular-cypress-jest-playground`, but you would have to use AWS Route 53 to register that domain name for $12/year. (Did not do this for this example).
+
+5. Default Root Object: enter `index.html`.You can leave everything else default and save.
+
+6. You should be at CloudFront Distributions. Put a check mark on the distribution and go to Distribution Settings > Error Pages > Create Custom Error Response.
+
+7. You will create 2 custom error responses for 403 and 404. Each should have **Response Page Path**: `/index.html` and **HTTP Response Code**: `200: OK`.  
+
+
+Our alternate url is https://d1kaucldkbcik4.cloudfront.net. 
+
+You can now make 3 changes to the test architecture, so that master pipeline runs against this new url.
+
+1. set `cypress/config/dev.json` file's `baseUrl` as `https://d1kaucldkbcik4.cloudfront.net`.
+2. add a script to `package.json` to run tests againt the dev deployment: `"cypress:open-dev": "cypress open --config-file cypress/config/dev.json"`
+3. create a master pipeline / dev deployment e2e test job. Refer to `cypress/.gitla-ci-tests.yml` `.dev_template: &dev` job for details.
+
+> Note: in the real world you would have infra as code, and the deployments would be targeting S3 automatically, without us having to manually deploy the app. This process is not a part of the repo here.
 
 </details>
