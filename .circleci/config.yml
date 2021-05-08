@@ -56,12 +56,13 @@ commands:
     steps:
       - run: ls -la .
       - run: ls -la coverage-part || true
-      - run: npx nyc merge coverage-part
+      - run : mkdir reports
+      - run : cp -r coverage-part/. reports
+      - run : cp coverage/coverage-final.json reports/from-jest.json
+      - run: npx nyc merge reports
       - run: mkdir .nyc_output || true
-      # storing the combined report in ".nyc_output/out.json"
-      # allows other NYC commands to find it right away
       - run: mv coverage.json .nyc_output/out.json
-      - run: ls -la .nyc_output
+
 
 jobs:
   merge-coverage:
@@ -80,7 +81,6 @@ jobs:
       - store_artifacts:
           path: combined-coverage
 
-
 workflows:
   build:
     jobs:
@@ -95,7 +95,14 @@ workflows:
                 name: Run Unit Tests
                 command: npm run test
             - store_artifacts:
-                path: coverage-unit
+                path: coverage
+            - persist_to_workspace:
+                root: ~/
+                paths:
+                  # note that the current folder is "project"
+                  # so we need to save the full path correctly
+                  # otherwise the files will not be restored in the expected location
+                  - 'project/coverage/*'
 
       - cypress/run:
           requires:
@@ -105,7 +112,6 @@ workflows:
           record: true
           parallel: true
           parallelism: 2
-          no-workspace: true
           group: 'all tests'
           start: npm start
           wait-on: 'http://localhost:4200'
