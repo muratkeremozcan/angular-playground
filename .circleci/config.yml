@@ -60,8 +60,10 @@ commands:
       - run : cp -r coverage-part/. reports
       - run : cp coverage/coverage-final.json reports/from-jest.json
       - run: npx nyc merge reports
+      - run: rm -rf .nyc_output # to counter the CI flake https://github.com/istanbuljs/istanbuljs/issues/572
       - run: mkdir .nyc_output || true
       - run: mv coverage.json .nyc_output/out.json
+      - run: ls -la reports
 
 
 jobs:
