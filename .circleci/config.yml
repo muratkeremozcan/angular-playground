@@ -76,9 +76,10 @@ jobs:
       - merge-coverage-reports
       - run:
           name: generate coverage report
+          # it appears that lcov report can flake ttps://github.com/istanbuljs/istanbuljs/issues/572, therefore using html report
           command: |
             npx nyc report \
-              --reporter lcov --reporter text-summary \
+              --reporter html --reporter text-summary \
               --report-dir combined-coverage
       - store_artifacts:
           path: combined-coverage
