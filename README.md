@@ -1,4 +1,6 @@
-This repo is a copy of Angular's Karma examples, enhanced for innovation activities, best practices and information sharing. ![cypress version](https://img.shields.io/badge/cypress-7.2.0-brightgreen)
+# angular-playground ![cypress version](https://img.shields.io/badge/cypress-7.2.0-brightgreen)
+
+This repo is a copy of Angular's Karma examples, enhanced for innovation activities, best practices and information sharing.
 
 Originally the repository was Siemens internal and used  GitLab. It got migrated to Github and CircleCI, but the gitlab files have been left-in for a reference. Technically, this repo can be dropped in at gitlab.com and it would work, granted the runner tags are modified.
 
@@ -16,8 +18,8 @@ Improvements over the base application include:
 Clone, cd in.
 
 ```bash
-npm i       # installs 
-npm start   # serves 
+npm i       # installs
+npm start   # serves
 
 # on another tab
 
@@ -31,7 +33,7 @@ npm run cypress:open-dev   # starts cypress test runner against deployed s3 stat
 ### Links
 [CircleCI Pipelines](https://app.circleci.com/pipelines/github/muratkeremozcan/angular-playground)
 
-[Cypress Dashboard](https://dashboard.cypress.io/projects/4mhoqq/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&timeRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D) 
+[Cypress Dashboard](https://dashboard.cypress.io/projects/4mhoqq/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&timeRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D)
 
 [Combined coverage blog post](https://dev.to/muratkeremozcan/combined-unit-e2e-code-coverage-case-study-on-a-real-life-system-using-angular-jest-cypress-gitlab-35nk)
 
@@ -39,7 +41,7 @@ npm run cypress:open-dev   # starts cypress test runner against deployed s3 stat
 <br></br>
 
 
-The original Karma example repo can be found [here](https://github.com/muratkeremozcan/books/tree/master/Angular_with_Typescript/angular-unit-testing-with-Karma). 
+The original Karma example repo can be found [here](https://github.com/muratkeremozcan/books/tree/master/Angular_with_Typescript/angular-unit-testing-with-Karma).
 <details><summary>Migrating from Karma to Jest</summary>
 
 
@@ -144,10 +146,10 @@ A [Service Worker](https://angular.io/guide/service-worker-intro) is a script th
 
   2. `updateMode` works for resources already in the cache.
 
-  These properties can have 2 values– `prefetch` and `lazy`. 
+  These properties can have 2 values– `prefetch` and `lazy`.
 
   `prefetch` means that the service worker will go ahead and download all resources in the group as soon as possible and put them into the cache.
-  This uses more data initially but ensures that resources are already in the cache, even when the application goes offline later. 
+  This uses more data initially but ensures that resources are already in the cache, even when the application goes offline later.
 
   `lazy` means that the service worker will only download the resources when they are requested.
 
@@ -155,7 +157,7 @@ A [Service Worker](https://angular.io/guide/service-worker-intro) is a script th
 
 
 
-*  `angular.json` build section gets updated. 
+*  `angular.json` build section gets updated.
 
     If you want to enable service workers in deployments, double check that it is also copied to other config sections (dev, int, preview etc.).
     ```json
@@ -181,7 +183,7 @@ A [Service Worker](https://angular.io/guide/service-worker-intro) is a script th
 Build in prod mode and locally test utilizing [`http-server`](https://www.npmjs.com/package/http-server) package.
 > Service workers are only available in Prod mode.
 
-**Arrange:** 
+**Arrange:**
 
   ```bash
   ng build --prod
@@ -192,14 +194,14 @@ Build in prod mode and locally test utilizing [`http-server`](https://www.npmjs.
   ```
 
   Nav to `http://127.0.0.1:8080` , use incognito.
-  
+
 
 **Act:**
 
-Using Devtools > Network tab,  turn the network off and refresh the app. 
+Using Devtools > Network tab,  turn the network off and refresh the app.
 
 
-**Assert:** 
+**Assert:**
 
 The app should work as normal and the browser should not show disconnected page `There is no Internet connection`.
 
@@ -226,7 +228,7 @@ ng add @briebug/cypress-schematic
 ```
 
 You can optionally leave the changes it makes to `angular.json`, and `package.json` they do not do harm.
-Personally I do not utilize them. So I remove the "e2e", "cypress-run" and "cypress-open" properties from `angular.json`. I also remove the `briebug/cypress-schematic` package from `package.json`. 
+Personally I do not utilize them. So I remove the "e2e", "cypress-run" and "cypress-open" properties from `angular.json`. I also remove the `briebug/cypress-schematic` package from `package.json`.
 
 ```json
   "e2e": { ...
@@ -252,13 +254,13 @@ Personally I do not utilize them. So I remove the "e2e", "cypress-run" and "cypr
       "openMode": 0
     },
     "chromeWebSecurity": false, // will help with x-origin
-    "$schema": "https://on.cypress.io/cypress.schema.json",  // will safeguard against misconfiguration of cypress.json 
+    "$schema": "https://on.cypress.io/cypress.schema.json",  // will safeguard against misconfiguration of cypress.json
   }
   ```
 
 * Use config files
 
-  A good pattern for testing different deployments (development, staging, production etc.) is using config files. 
+  A good pattern for testing different deployments (development, staging, production etc.) is using config files.
 
   I like to use `@bahmutov/cypress-extends` to have the custom config files I create under `cypress/config` folder inherit from the base `cypress.json` file. This is not yet included in the base Cypress install. Refer to `plugins/index.js` `cypress/config/` folder to sample the setup.
 
@@ -271,7 +273,7 @@ Personally I do not utilize them. So I remove the "e2e", "cypress-run" and "cypr
   ```
 
 * Add 2 scripts to package.json, to open Cypress with test runner and to run Cypress headed. The `--config-file cypress/config/local.json` is optional, but needed to utilize config files.
-* 
+*
   ```json
   "cypress:open": "cypress open --config-file cypress/config/local.json",
   "cypress:run": "cypress run --config-file cypress/config/local.json"
@@ -279,9 +281,9 @@ Personally I do not utilize them. So I remove the "e2e", "cypress-run" and "cypr
 
 ### Start Cypress
 
-Serve your app with `npm run start` and on another tab start Cypress with `npm run cypress:open`. 
+Serve your app with `npm run start` and on another tab start Cypress with `npm run cypress:open`.
 
-To execute the tests in CI or without the test runner UI locally, use `npm run cypress:run`. 
+To execute the tests in CI or without the test runner UI locally, use `npm run cypress:run`.
 
 </details>
 
@@ -299,8 +301,8 @@ To execute the tests in CI or without the test runner UI locally, use `npm run c
   },
   ```
 
-* `npm i -D star-server-and-test` . [start-server-and-test](https://www.npmjs.com/package/start-server-and-test) makes it easy to spin a localhost in CI and run e2e against it. 
-  
+* `npm i -D star-server-and-test` . [start-server-and-test](https://www.npmjs.com/package/start-server-and-test) makes it easy to spin a localhost in CI and run e2e against it.
+
   Locally try out the script `npm run easy` to see it serve localhost and then open cypress.
 
   In CI we use a version of it:
@@ -322,7 +324,7 @@ To execute the tests in CI or without the test runner UI locally, use `npm run c
   * Connect to Dashboard and create a project.
   * From here on, Cypress docs are excellent. But, effectively all you need is to set the projectId in `cypress.json` and/or the config files (`"projectId": "4mhoqq"`) and use the record key.
   * Test a recording locally `npx cypress run --record --key 29b708ae-6839-4446-8d68-d93ad6ca81f9`
-  * [As advised in the docs](https://docs.cypress.io/guides/guides/command-line#cypress-run) set the key as an environment variable in CI (already done in CI, but not in your local environment, obviously). If you set this env var locally, you can omit the key parameter: `npx cypress run --record ` 
+  * [As advised in the docs](https://docs.cypress.io/guides/guides/command-line#cypress-run) set the key as an environment variable in CI (already done in CI, but not in your local environment, obviously). If you set this env var locally, you can omit the key parameter: `npx cypress run --record `
   * You can view all the runs at the [dashboard](https://dashboard.cypress.io/projects/4mhoqq/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&timeRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D) since this is a public project.
 
 </details>
@@ -341,7 +343,7 @@ Follow the [blog post](https://dev.to/muratkeremozcan/combined-unit-e2e-code-cov
 
 ### Setup eslint
 
-> Tip: to create a new Angular project with eslint 
+> Tip: to create a new Angular project with eslint
 >```bash
 >ng new --collection=@angular-eslint/schematics
 >```
@@ -354,10 +356,10 @@ Follow the [blog post](https://dev.to/muratkeremozcan/combined-unit-e2e-code-cov
   ng g @angular-eslint/schematics:convert-tslint-to-eslint
   # get some of the recommended plugins
   npm i -D eslint-plugin-import eslint-plugin-jsdoc eslint-plugin-prefer-arrow eslint-plugin-cypress eslint-plugin-jest
-  # remove tslint   
+  # remove tslint
   npm remove codelyzer
   npm remove tslint # if it's still in package.json
-  # remove tslint.json file 
+  # remove tslint.json file
   ```
 
   `angular.json` "lint" property should be as below. If not, make it so.
@@ -593,10 +595,10 @@ We can configure CloudFrount so that whenever S3 replies with 403 or 404, we ret
 
 6. You should be at CloudFront Distributions. Put a check mark on the distribution and go to Distribution Settings > Error Pages > Create Custom Error Response.
 
-7. You will create 2 custom error responses for 403 and 404. Each should have **Response Page Path**: `/index.html` and **HTTP Response Code**: `200: OK`.  
+7. You will create 2 custom error responses for 403 and 404. Each should have **Response Page Path**: `/index.html` and **HTTP Response Code**: `200: OK`.
 
 
-Our alternate url is https://d1kaucldkbcik4.cloudfront.net. 
+Our alternate url is https://d1kaucldkbcik4.cloudfront.net.
 
 You can now make 3 changes to the test architecture, so that master pipeline runs against this new url.
 
