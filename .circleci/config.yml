@@ -9,7 +9,7 @@ orbs:
 executors:
   latest:
     docker:
-      - image: cypress/included:7.3.0
+      - image: cypress/included:7.4.0
 
 commands:
   save-partial-coverage-report:
