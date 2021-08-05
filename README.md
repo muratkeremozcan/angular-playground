@@ -1,4 +1,4 @@
-# angular-playground ![cypress version](https://img.shields.io/badge/cypress-8.1.0-brightgreen) [![CircleCI](https://circleci.com/gh/muratkeremozcan/angular-playground/tree/master.svg?style=svg)](https://circleci.com/gh/muratkeremozcan/angular-playground/?branch=master)
+# angular-playground ![cypress version](https://img.shields.io/badge/cypress-8.2.0-brightgreen) [![CircleCI](https://circleci.com/gh/muratkeremozcan/angular-playground/tree/master.svg?style=svg)](https://circleci.com/gh/muratkeremozcan/angular-playground/?branch=master)
 
 This repo is a copy of Angular's Karma examples, enhanced for innovation activities, best practices and information sharing.
 
