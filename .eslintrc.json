@@ -11,10 +11,8 @@
         "*.ts"
       ],
       "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
+        "project": ["**/tsconfig.json"],
+        "sourceType": "module",
         "createDefaultProgram": true
       },
       "env": {
@@ -27,7 +25,6 @@
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:cypress/recommended",
-        "plugin:jest/recommended",
         "plugin:jest/style"
       ],
 
