@@ -28,13 +28,6 @@ preface.md
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
 # misc
 /.sass-cache
 /connect.lock
@@ -57,7 +50,6 @@ Thumbs.db
 *.mp4
 
 #FOLDERS
-.vscode/
 /reports
 /coverage-e2e
 /combined-coverage

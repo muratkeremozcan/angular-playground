@@ -1,0 +1,6 @@
+{
+  "deepscan.enable": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
