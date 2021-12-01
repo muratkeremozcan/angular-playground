@@ -3,10 +3,12 @@
   "include": ["./**/*.ts"],
   "exclude": [],
   "compilerOptions": {
-    "types": ["cypress"],
+    "types": ["cypress", "@cypress/skip-test"],
     "lib": ["es2015", "dom"],
     "isolatedModules": false,
     "allowJs": true,
     "noEmit": true
-  }
+  },
+  "allowJs": true,
+  "resolveJsonModule": true
 }
