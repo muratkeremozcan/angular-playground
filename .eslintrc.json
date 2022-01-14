@@ -35,6 +35,7 @@
         "max-len": ["error", { "code": 250 }],
         "jest/no-large-snapshots": ["warn", { "maxSize": 12, "inlineMaxSize": 6 }],
         "jest/no-jasmine-globals": "off",
+        "jest/expect-expect": "off",
         "quotes": [1, "single", { "allowTemplateLiterals": true }],
         "@angular-eslint/component-selector": [
           "error",
