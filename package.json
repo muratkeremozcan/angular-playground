@@ -73,7 +73,7 @@
     "jest-preset-angular": "^8.4.0",
     "js-beautify": "^1.13.13",
     "ng-mocks": "^13.5.2",
-    "ngx-build-plus": "^11.0.0",
+    "ngx-build-plus": "^13.0.1",
     "prettier": "^2.2.1",
     "start-server-and-test": "^1.12.1",
     "stylelint": "^13.13.0",
