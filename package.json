@@ -50,7 +50,7 @@
     "@angular/compiler-cli": "11.2.2",
     "@angular/language-service": "11.2.2",
     "@bahmutov/cypress-extends": "1.1.0",
-    "@cypress/code-coverage": "3.9.12",
+    "@cypress/code-coverage": "3.10.0",
     "@ngneat/spectator": "^7.1.0",
     "@skyux-sdk/istanbul-instrumenter-loader": "^4.0.0",
     "@types/jest": "^26.0.21",
