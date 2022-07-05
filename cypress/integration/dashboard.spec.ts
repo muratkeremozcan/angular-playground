@@ -1,5 +1,4 @@
 describe('dashboard', () => {
-
   before(() => cy.visit('/'));
 
   it('should default to dashboard', () => {
@@ -7,7 +6,7 @@ describe('dashboard', () => {
     cy.url().should('include', 'dashboard');
   });
 
-  it('should nav to a heroes click and nav to heroes list on cancel, and nav back to dashboard ', () => {
+  it('should nav to a heroes click and nav to heroes list on cancel, and nav back to dashboard', () => {
     cy.get('.hero').first().click();
     cy.url().should('include', '/heroes/');
 
@@ -18,6 +17,5 @@ describe('dashboard', () => {
     cy.get('[routerlink="/dashboard"]').click();
     cy.url().should('include', 'dashboard');
     cy.get('.hero').should('have.length', 4);
-  })
-
+  });
 });
