@@ -4,7 +4,7 @@
 # https://github.com/cypress-io/circleci-orb
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@2.0.0
+  cypress: cypress-io/cypress@2.1.0
 
 executors:
   latest:
