@@ -1,5 +1,6 @@
-describe('dashboard', () => {
+/// <reference types="Cypress" />
 
+describe('dashboard', () => {
   before(() => cy.visit('/'));
 
   it('should default to dashboard', () => {
