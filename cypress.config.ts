@@ -16,6 +16,6 @@ export default defineConfig({
       return Object.assign({}, cyCodeCoverageTask(on, config), cyExtendsTask(config.configFile));
     },
     baseUrl: 'http://localhost:4200',
-    specPattern: 'cypress/integration/**/*.ts'
+    specPattern: 'cypress/e2e/**/*.ts'
   }
 });
