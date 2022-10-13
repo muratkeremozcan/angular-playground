@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-banner',
+  standalone: true,
+  selector: 'banner',
   template: '<h1>{{title}}</h1>',
   styles: ['h1 { color: green; font-size: 350%}']
 })

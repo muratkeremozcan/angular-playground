@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { BannerComponent } from './banner/banner.component';
 import { HeroService, UserService } from './model';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { SharedModule } from './shared/shared.module';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -16,9 +14,7 @@ import { environment } from '../environments/environment';
 @NgModule({
   imports: [
     BrowserModule,
-    DashboardModule,
     AppRoutingModule,
-    SharedModule,
     HttpClientModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -29,10 +25,11 @@ import { environment } from '../environments/environment';
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    BannerComponent
   ],
   providers: [HeroService, UserService],
-  declarations: [AppComponent, BannerComponent, WelcomeComponent],
+  declarations: [AppComponent, WelcomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

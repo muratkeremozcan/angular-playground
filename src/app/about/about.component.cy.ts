@@ -1,7 +1,7 @@
 import { AboutComponent } from './about.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('AboutComponent', () => {
+describe('About Component', () => {
 
   // Mount the component before the start of the test
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('AboutComponent', () => {
     });
   });
 
-  it('mounts', () => {
+  it('Loads with a title and highlight', () => {
    cy.get('[data-cy=page-title]')
      .should('have.text', 'About')
      .should('have.css', 'background-color')

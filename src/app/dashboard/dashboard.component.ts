@@ -1,21 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Hero } from '../model/hero';
-import { HeroService } from '../model/hero.service';
+import { Router, RouterModule } from '@angular/router';
+import { Hero, HeroService } from '../model';
+import { DashboardHeroComponent } from './dashboard-hero/dashboard-hero.component';
+import { CommonModule } from '@angular/common';
+import { HighlightDirective } from '../directives/highlight.directive';
 
 @Component({
+  standalone: true,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
+  imports: [
+    RouterModule,
+    DashboardHeroComponent,
+    HighlightDirective,
+    CommonModule
+  ],
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   heroes: Hero[] = [];
 
-  constructor(private router: Router, private heroService: HeroService) {}
+  constructor(
+    private router: Router,
+    private heroService: HeroService
+  ) {}
 
   ngOnInit() {
-    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes.slice(1, 5)));
+    this.heroService.getHeroes()
+      .subscribe((heroes) => (this.heroes = heroes.slice(1, 5)));
   }
 
   gotoDetail(hero: Hero) {

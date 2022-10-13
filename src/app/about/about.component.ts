@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TwainComponent } from '../twain/twain.component';
-import { HighlightDirective } from '../shared/highlight.directive';
+import { HighlightDirective } from '../directives/highlight.directive';
 
 @Component({
   standalone: true,
