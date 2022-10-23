@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Observable, of } from 'rxjs';
 import { catchError, startWith } from 'rxjs/operators';
-
 import { TwainService } from './twain.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'twain-quote',
+  imports: [CommonModule],
+  providers: [TwainService],
   template: ` <p class="twain">
       <i>{{ quote | async }}</i>
     </p>

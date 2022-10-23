@@ -13,6 +13,9 @@
   "files": [
     "src/polyfills.ts"
   ],
+  "exclude": [
+    "src/**/*.cy.ts"
+  ],
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"

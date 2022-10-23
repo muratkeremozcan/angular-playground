@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-
 import { Hero } from './hero';
 
 const httpOptions = {

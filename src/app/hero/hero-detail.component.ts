@@ -1,14 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { Hero } from '../model/hero';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Hero } from '../model';
 import { HeroDetailService } from './hero-detail.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css']
-  // providers: [HeroDetailService], @fixed this is dumb to make this component provided, it maintains no state
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;

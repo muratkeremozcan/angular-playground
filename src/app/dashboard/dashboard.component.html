@@ -1,11 +1,12 @@
-<h2 highlight>{{title}}</h2>
+<h2 highlight data-cy="page-title">{{title}}</h2>
 
 <div class="grid grid-pad qa-heroes">
-  <dashboard-hero *ngFor="let hero of heroes"
-                  class="col-1-4 qa-hero-list-item"
-                  [hero]=hero
-                  (selected)="gotoDetail($event)">
-  </dashboard-hero>
+  <ng-container *ngFor="let hero of heroes">
+    <dashboard-hero class="col-1-4 qa-hero-list-item"
+                    [hero]=hero
+                    (selected)="gotoDetail($event)">
+    </dashboard-hero>
+  </ng-container>
 </div>
 
 

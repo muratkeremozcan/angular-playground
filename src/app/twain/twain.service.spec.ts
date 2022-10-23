@@ -21,7 +21,10 @@ describe('TwainService', () => {
   });
 
   it('should getQuote', () => {
-    twainService.getQuote().subscribe((quote) => (assertion = quote), fail);
+    twainService.getQuote().subscribe(
+      (quote) => (assertion = quote),
+      () => { throw new Error() }
+    );
 
     spectator.expectOne('api/quotes/1', HttpMethod.GET).flush(expectedQuote);
 

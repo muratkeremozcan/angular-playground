@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { Hero } from '../model/hero';
-import { HeroService } from '../model/hero.service';
+import { Hero, HeroService } from '../model';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-heroes',
+  imports: [CommonModule, RouterModule],
   templateUrl: './hero-list.component.html',
   styleUrls: ['./hero-list.component.css']
 })

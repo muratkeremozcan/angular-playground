@@ -1,13 +1,11 @@
 import { Router } from '@angular/router';
 import { Spectator, createRoutingFactory } from '@ngneat/spectator/jest';
-
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroDetailService } from './hero-detail.service';
 import { FormsModule } from '@angular/forms';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { TitleCasePipe } from 'src/app/shared/title-case.pipe';
 
 // [4] testing components that use routing and @Input / @Output properties // https://github.com/ngneat/spectator#testing-with-routing
 // this component is a special case where there is an @Input that gets set after an ngOnInit with a service observable call
@@ -45,8 +43,7 @@ describe('module test', () => {
       })
     ],
     imports: [FormsModule], // need formsModule for the template ngmodel
-    detectChanges: false,
-    declarations: [TitleCasePipe]
+    detectChanges: false
   });
 
   beforeEach(() => {

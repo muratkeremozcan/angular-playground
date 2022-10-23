@@ -1,7 +1,4 @@
-import { fakeAsync, tick } from '@angular/core/testing';
 import { SpectatorHttp, createHttpFactory, HttpMethod } from '@ngneat/spectator/jest';
-import { of } from 'rxjs';
-
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
@@ -41,7 +38,7 @@ describe('[3] Testing Http', () => {
       // (3.2.2) initiate the client request, and setup the assertion that will happen once the observable is fulfilled
       heroService.getHeroes().subscribe(
         (heroes) => (assertion = heroes),
-        fail // the error case of the observable
+        (err) => { throw new Error() } // the error case of the observable
       );
 
       // (3.2.3) expect that a single request has been made which matches the given URL, using spectator.expectOne
@@ -54,7 +51,7 @@ describe('[3] Testing Http', () => {
     });
 
     it('cover the Empty Response Case', () => {
-      heroService.getHeroes().subscribe((heroes) => (assertion = heroes), fail);
+      heroService.getHeroes().subscribe((heroes) => (assertion = heroes), (err) => { throw new Error() });
 
       const req = spectator.expectOne(heroService.heroesUrl, HttpMethod.GET);
       req.flush([]);
@@ -66,7 +63,7 @@ describe('[3] Testing Http', () => {
       const msg = 'Deliberate 404';
 
       heroService.getHeroes().subscribe(
-        (heroes) => fail('expected to fail'),
+        (heroes) => { throw new Error('expected to fail') },
         (error) => (assertion = error.message) // 3.4.0 in error testing, define the error response and bypass the success case
       );
 
@@ -84,12 +81,12 @@ describe('[3] Testing Http', () => {
     });
 
     it('(3.6) testing PUTs: test the method type and request body that is going out from the client', () => {
-      heroService.updateHero(hero).subscribe((data) => (assertion = data), fail);
+      heroService.updateHero(hero).subscribe((data) => (assertion = data), (err) => { throw new Error() });
 
       const req = spectator.expectOne(heroService.heroesUrl, HttpMethod.PUT);
 
-      expect(req.request.body.id).toEqual(1);
-      expect(req.request.body.name).toEqual('A');
+      expect(req.request.body.id).toBe(1);
+      expect(req.request.body.name).toBe('A');
 
       req.flush(hero);
       expect(assertion).toEqual(hero);
@@ -100,7 +97,7 @@ describe('[3] Testing Http', () => {
       const msg = 'Deliberate 404';
 
       heroService.updateHero(hero).subscribe(
-        (heroes) => fail('expected to fail'),
+        (heroes) => { throw new Error('expected to fail') },
         (error) => (assertion = error.message) // KEY (same as GET scenario IN 3.4) in error testing, define the error response and bypass the success
       );
 
@@ -118,12 +115,12 @@ describe('[3] Testing Http', () => {
     });
 
     it('(3.6) testing POSTs: test the method type and request body that is going out from the client', () => {
-      heroService.addHero(hero).subscribe((data) => (assertion = data), fail);
+      heroService.addHero(hero).subscribe((data) => (assertion = data), (err) => { throw new Error() });
 
       const req = spectator.expectOne(heroService.heroesUrl, HttpMethod.POST);
 
-      expect(req.request.body.id).toEqual(1);
-      expect(req.request.body.name).toEqual('A');
+      expect(req.request.body.id).toBe(1);
+      expect(req.request.body.name).toBe('A');
 
       req.flush(hero);
       expect(assertion).toEqual(hero);
@@ -133,7 +130,7 @@ describe('[3] Testing Http', () => {
       const msg = 'Deliberate 404';
 
       heroService.addHero(hero).subscribe(
-        (heroes) => fail('expected to fail'),
+        (heroes) => { throw new Error('expected to fail') },
         (error) => (assertion = error.message) // KEY (same as GET scenario IN 3.4) in error testing, define the error response and bypass the success
       );
 
@@ -150,7 +147,7 @@ describe('[3] Testing Http', () => {
     });
 
     it('(3.6) testing DELETE: test the method type', () => {
-      heroService.deleteHero(hero).subscribe((data) => (assertion = data), fail);
+      heroService.deleteHero(hero).subscribe((data) => (assertion = data), (err) => { throw new Error() });
 
       const req = spectator.expectOne(`${heroService.heroesUrl}/1`, HttpMethod.DELETE);
       req.flush([]);
@@ -161,7 +158,7 @@ describe('[3] Testing Http', () => {
       const msg = 'Deliberate 404';
 
       heroService.deleteHero(hero).subscribe(
-        (heroes) => fail('expected to fail'),
+        (heroes) => { throw new Error('expected to fail')},
         (error) => (assertion = error.message) // KEY (same as GET scenario IN 3.4) in error testing, define the error response and bypass the success
       );
 

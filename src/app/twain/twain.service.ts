@@ -2,8 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable, of, throwError, Observer } from 'rxjs';
-import { concat, map, retryWhen, switchMap, take, tap } from 'rxjs/operators';
+import { Observable, throwError, Observer } from 'rxjs';
+import { concat, map, retryWhen, switchMap, take } from 'rxjs/operators';
 
 import { Quote } from './quote';
 

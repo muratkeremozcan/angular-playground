@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Hero } from '../model/hero';
-import { HeroService } from '../model/hero.service';
+import { Router, RouterModule } from '@angular/router';
+import { Hero, HeroService } from '../model';
+import { DashboardHeroComponent } from './dashboard-hero/dashboard-hero.component';
+import { CommonModule } from '@angular/common';
+import { HighlightDirective } from '../directives/highlight.directive';
 
 @Component({
+  standalone: true,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
+  imports: [RouterModule, DashboardHeroComponent, HighlightDirective, CommonModule],
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  heroes: Hero[] = [];
+  public heroes: Hero[] = [];
 
   constructor(private router: Router, private heroService: HeroService) {}
 
-  ngOnInit() {
+  get title(): string {
+    const cnt = this.heroes.length;
+    return cnt === 0 ? 'No Heroes' : cnt === 1 ? 'Top Hero' : `Top ${cnt} Heroes`;
+  }
+
+  ngOnInit(): void {
     this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes.slice(1, 5)));
   }
 
-  gotoDetail(hero: Hero) {
+  gotoDetail(hero: Hero): void {
     const url = `/heroes/${hero.id}`;
     this.router.navigateByUrl(url);
-  }
-
-  get title() {
-    const cnt = this.heroes.length;
-    return cnt === 0 ? 'No Heroes' : cnt === 1 ? 'Top Hero' : `Top ${cnt} Heroes`;
   }
 }
 

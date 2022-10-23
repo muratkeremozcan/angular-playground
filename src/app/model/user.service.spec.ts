@@ -6,7 +6,7 @@ describe('UserService', () => {
     const user = new UserService();
 
     expect(user.isLoggedIn).toBe(true);
-    expect(user.user.name).toEqual('Sam Spade');
+    expect(user.user.name).toBe('Sam Spade');
     expect(user).toMatchSnapshot();
   });
 });

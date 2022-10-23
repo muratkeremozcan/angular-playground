@@ -1,12 +1,12 @@
-import { Spectator, createRoutingFactory, byText } from '@ngneat/spectator/jest';
+import { Spectator, createRoutingFactory } from '@ngneat/spectator/jest';
 import { DashboardComponent } from './dashboard.component';
-import { HeroService } from '../model/hero.service';
+import { HeroService } from '../model';
 import { Hero } from '../model';
 import { of } from 'rxjs';
-import { DashboardHeroComponent } from './dashboard-hero.component';
 import { MockComponent, MockProvider } from 'ng-mocks';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { DashboardHeroComponent } from './dashboard-hero/dashboard-hero.component';
 
 // [6] testing components that include other components, services (example[5]), and routing (example[4])
 // setup the component with routing, use createRoutingFactory to auto-mock Router and ActivatedRoute (6.1). Just like (4.1)
@@ -22,8 +22,6 @@ import { Router } from '@angular/router';
 describe('[6] Testing components that include other components, services (example[5]), and routing (example[4])', () => {
   let component: DashboardComponent;
   let spectator: Spectator<DashboardComponent>;
-  // let heroServiceSpy;
-  // let heroService;
 
   const heroes: Hero[] = [
     { id: 41, name: 'Bob' },
@@ -39,7 +37,7 @@ describe('[6] Testing components that include other components, services (exampl
     component: DashboardComponent,
     // (6.1.5) KEY: mock the internal components, use the ng-mocks library MockComponent.
     // Instead of using CUSTOM_ELEMENTS_SCHEMA, which might hide some issues and won't help you to set inputs, outputs, etc., ng-mocks will auto mock the inputs, outputs, etc. for you
-    declarations: [MockComponent(DashboardHeroComponent)],
+    imports: [MockComponent(DashboardHeroComponent)],
     // (6.1.2) mock the service dependency,
     providers: [
       MockProvider(HeroService, {

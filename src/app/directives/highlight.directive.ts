@@ -1,6 +1,9 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
-@Directive({ selector: '[highlight]' })
+@Directive({
+  standalone: true,
+  selector: '[highlight]'
+})
 /**
  * Set backgroundColor for the attached element to highlight color
  * and set the element's customProperty to true

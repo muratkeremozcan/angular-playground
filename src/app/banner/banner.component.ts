@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-banner',
+  standalone: true,
+  selector: 'banner',
   template: '<h1>{{title}}</h1>',
-  styles: ['h1 { color: green; font-size: 350%}']
+  styles: [
+    `
+      h1 {
+        color: green;
+        font-size: 350%;
+        margin: 0;
+      }
+    `
+  ]
 })
 export class BannerComponent {
-  title = 'Test Tour of Heroes';
+  @Input() title = 'Test Tour of Heroes';
 }
 
 /*
