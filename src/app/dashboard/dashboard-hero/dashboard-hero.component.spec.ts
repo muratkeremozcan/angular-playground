@@ -1,6 +1,6 @@
-import { Hero } from '../model/hero';
 import { Spectator, createComponentFactory, byText } from '@ngneat/spectator/jest';
 import { DashboardHeroComponent } from './dashboard-hero.component';
+import { Hero } from '../../model';
 
 // [1].2 unit testing components with @Input and @Output properties
 // setup the component much less overhead with spectator (1.1)

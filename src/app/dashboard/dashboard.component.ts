@@ -9,35 +9,26 @@ import { HighlightDirective } from '../directives/highlight.directive';
   standalone: true,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  imports: [
-    RouterModule,
-    DashboardHeroComponent,
-    HighlightDirective,
-    CommonModule
-  ],
+  imports: [RouterModule, DashboardHeroComponent, HighlightDirective, CommonModule],
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  heroes: Hero[] = [];
+  public heroes: Hero[] = [];
 
-  constructor(
-    private router: Router,
-    private heroService: HeroService
-  ) {}
+  constructor(private router: Router, private heroService: HeroService) {}
 
-  ngOnInit() {
-    this.heroService.getHeroes()
-      .subscribe((heroes) => (this.heroes = heroes.slice(1, 5)));
-  }
-
-  gotoDetail(hero: Hero) {
-    const url = `/heroes/${hero.id}`;
-    this.router.navigateByUrl(url);
-  }
-
-  get title() {
+  get title(): string {
     const cnt = this.heroes.length;
     return cnt === 0 ? 'No Heroes' : cnt === 1 ? 'Top Hero' : `Top ${cnt} Heroes`;
+  }
+
+  ngOnInit(): void {
+    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes.slice(1, 5)));
+  }
+
+  gotoDetail(hero: Hero): void {
+    const url = `/heroes/${hero.id}`;
+    this.router.navigateByUrl(url);
   }
 }
 

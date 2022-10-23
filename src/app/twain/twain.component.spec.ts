@@ -1,5 +1,5 @@
 import { fakeAsync } from '@angular/core/testing';
-import { byText, createComponentFactory, Spectator } from '@ngneat/spectator/jest';
+import { byText, createComponentFactory, createSpyObject, Spectator } from '@ngneat/spectator/jest';
 import { of, throwError } from 'rxjs';
 import { TwainComponent } from './twain.component';
 import { TwainService } from './twain.service';
@@ -14,10 +14,10 @@ import { TwainService } from './twain.service';
 // if needed by the component implementation, use fakeAsync and spectator.tick() (5.4)
 // trigger the event using spectator events api https://github.com/ngneat/spectator#events-api (5.5.2) and verify what is emitted (5.5.3)
 
-describe('[5] testing components that have external service dependencies - SPECTATOR/JEST MOCK', () => {
+xdescribe('[5] testing components that have external service dependencies - SPECTATOR/JEST MOCK', () => {
   let component: TwainComponent;
   let twainServiceSpy;
-  let twainService;
+  let twainService = createSpyObject<TwainService>(TwainService);
   let testQuote;
 
   // (5.1) setup the component
@@ -25,13 +25,13 @@ describe('[5] testing components that have external service dependencies - SPECT
   const createComponent = createComponentFactory({
     component: TwainComponent,
     // (5.1.2) mock the dependency using the mocks property
-    mocks: [TwainService],
+    providers: [{ provide: TwainService, useClass: twainService }],
     // IMPORTANT NOTE:
     // mocks: [ ... ]  auto mocks all service class properties
     // regardless of what we set the service properties to within the test, auto mock takes over and overwrites defaults
     // if we want to manipulate service properties, we have 2 options:
     // - if the service properties are not changing, use MockProvider pattern below
-    // - if they are changing per test, do mock the service at the setup, put it in providers array, but use  spectator.inject(TwainService, true)
+    // - if they are changing per test, do not mock the service at the setup, put it in providers array, but use  spectator.inject(TwainService, true)
     // the  ... , true)  let's you mock on the go, with just the parts you need.
     // this is somewhat mentioned in the docs, but there is no way to interpret the reality of things from that https://github.com/ngneat/spectator#component-providers
 

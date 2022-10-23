@@ -1,10 +1,12 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { QUOTES } from './twain/twain.data';
+import { Injectable } from '@angular/core';
 
 // Adjust to reduce number of quotes
 const maxQuotes = Infinity; // 0;
 
 /** Create in-memory database of heroes and quotes */
+@Injectable()
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const heroes = [

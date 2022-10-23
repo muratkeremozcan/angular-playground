@@ -28,7 +28,11 @@ describe('App component', () => {
     stubsEnabled: false,
     // (7.1.4) use the RouterTestingModule and RouterLink from Angular
     providers: [RouterLink],
-    imports: [RouterTestingModule],
+    imports: [
+      RouterTestingModule,
+      MockComponent(BannerComponent),
+      MockComponent(WelcomeComponent),
+    ],
     // (7.1.5) pass a routing configuration using routes: property, use the MockComponent in the in the outlet
     routes: [
       {
@@ -41,7 +45,9 @@ describe('App component', () => {
       }
     ],
     // (7.1.6) mock the internal components, use the ng-mocks library MockComponent
-    declarations: [MockComponent(BannerComponent), MockComponent(WelcomeComponent), MockHeroesComponent]
+    declarations: [
+      MockHeroesComponent
+    ]
   });
 
   beforeEach(() => {

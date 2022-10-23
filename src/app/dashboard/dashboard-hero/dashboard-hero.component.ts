@@ -6,9 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   selector: 'dashboard-hero',
-  template: `<div (click)="click()"
-                  data-cy="hero"
-                  class="hero qa-hero">{{ hero?.name | uppercase }}</div>`,
+  template: `<div (click)="click()" data-cy="hero" class="hero qa-hero">{{ hero?.name | uppercase }}</div>`,
   styleUrls: ['./dashboard-hero.component.css']
 })
 export class DashboardHeroComponent {

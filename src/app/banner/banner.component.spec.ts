@@ -1,5 +1,5 @@
 import { Spectator, createComponentFactory, byText } from '@ngneat/spectator/jest';
-import { BannerComponent } from './banner-external.component';
+import { BannerComponent } from './banner.component';
 
 // [1].1 testing components, basic example
 // setup the component much less overhead with spectator (1.1)

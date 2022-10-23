@@ -8,8 +8,8 @@ describe('Dashboard Component', () => {
     cy.mount(DashboardComponent, {
       imports: [
         HttpClientTestingModule,
-        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false }),
-      ],
+        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
+      ]
     });
   });
 
@@ -21,10 +21,8 @@ describe('Dashboard Component', () => {
   });
 
   it('should show the top heroes after OnInit', () => {
-    cy.get('[data-cy="page-title"]')
-      .should('have.text', 'Top 4 Heroes');
+    cy.get('[data-cy="page-title"]').should('have.text', 'Top 4 Heroes');
 
-    cy.get('dashboard-hero')
-      .should('have.length', 4);
+    cy.get('dashboard-hero').should('have.length', 4);
   });
-})
+});

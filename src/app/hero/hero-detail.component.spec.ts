@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { Spectator, createRoutingFactory } from '@ngneat/spectator/jest';
-
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroDetailService } from './hero-detail.service';
 import { FormsModule } from '@angular/forms';
@@ -44,7 +43,7 @@ describe('module test', () => {
       })
     ],
     imports: [FormsModule], // need formsModule for the template ngmodel
-    detectChanges: false,
+    detectChanges: false
   });
 
   beforeEach(() => {

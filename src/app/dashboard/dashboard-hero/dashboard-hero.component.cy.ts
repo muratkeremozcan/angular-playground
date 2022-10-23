@@ -16,14 +16,13 @@ describe('Dashboard Hero Component', () => {
   it('should display a hero name when provided via input', () => {
     cy.mount(DashboardHeroComponent, {
       imports: [DashboardHeroComponent]
-    }).then(wrapper => {
+    }).then((wrapper) => {
       wrapper.component.hero = mockHero;
       wrapper.fixture.detectChanges();
       return cy.wrap(wrapper).as('angular');
     });
 
-    cy.get('[data-cy="hero"]')
-      .should('have.text', 'NEW HERO NAME');
+    cy.get('[data-cy="hero"]').should('have.text', 'NEW HERO NAME');
   });
 
   it('should emit the selected hero to the consumer when clicked', () => {
@@ -31,17 +30,16 @@ describe('Dashboard Hero Component', () => {
       componentProperties: {
         selected: {
           emit: cy.spy().as('selectedSpy')
-        } as any,
+        } as any
       },
       imports: [DashboardHeroComponent]
-    }).then(wrapper => {
+    }).then((wrapper) => {
       wrapper.component.hero = mockHero;
       wrapper.fixture.detectChanges();
       return cy.wrap(wrapper).as('angular');
     });
 
-    cy.get('[data-cy="hero"]')
-      .click();
+    cy.get('[data-cy="hero"]').click();
 
     cy.get('@selectedSpy').should('have.been.calledWith', mockHero);
   });

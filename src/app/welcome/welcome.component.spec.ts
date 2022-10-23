@@ -1,5 +1,5 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
-import { UserService } from '../model/user.service';
+import { UserService } from '../model';
 import { WelcomeComponent } from './welcome.component';
 
 // [5].1 testing components that have external service dependencies - CUSTOM MOCK

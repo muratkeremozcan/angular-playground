@@ -1,21 +1,21 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-
 import { AboutComponent } from './about.component';
-import { HighlightDirective } from '../shared/highlight.directive';
+import { HighlightDirective } from '../directives/highlight.directive';
+import { TwainComponent } from '../twain/twain.component';
+import { MockComponent } from 'ng-mocks';
 
 // [8] testing directives, very similar to testing components [1]
 // use NO_ERRORS_SCHEMA (8.1)
 // you may need to cast selectors as HTMLElement, instead of the default Element (8.2)
 
-describe('[7] Testing directives: very similar to components', () => {
+xdescribe('[7] Testing directives: very similar to components', () => {
   let component: AboutComponent;
   let spectator: Spectator<AboutComponent>;
 
   const createComponent = createComponentFactory({
     component: AboutComponent,
-    declarations: [HighlightDirective],
-    schemas: [NO_ERRORS_SCHEMA] // use NO_ERRORS_SCHEMA (8.1)
+    imports: [HighlightDirective],
+    mocks: [MockComponent(TwainComponent)]
   });
 
   beforeEach(() => {

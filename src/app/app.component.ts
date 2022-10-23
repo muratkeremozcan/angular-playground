@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { BannerComponent } from './banner/banner.component';
+
 @Component({
+  standalone: true,
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  imports: [RouterModule, WelcomeComponent, BannerComponent]
 })
 export class AppComponent {}
 

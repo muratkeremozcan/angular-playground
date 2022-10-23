@@ -1,7 +1,6 @@
 import { HeroDetailService } from './hero-detail.service';
-import { HeroService } from '../model/hero.service';
+import { HeroService } from '../model';
 import { SpectatorService, createServiceFactory } from '@ngneat/spectator/jest';
-import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
