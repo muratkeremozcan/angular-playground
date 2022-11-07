@@ -3,6 +3,7 @@ import { TwainComponent } from '../twain/twain.component';
 import { HighlightDirective } from '../directives/highlight.directive';
 
 @Component({
+  selector: 'about',
   standalone: true,
   imports: [TwainComponent, HighlightDirective],
   template: `

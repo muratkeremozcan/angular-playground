@@ -14,26 +14,46 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import { mount } from 'cypress/angular'
+import { mount, MountConfig } from 'cypress/angular';
+import chaiColors from 'chai-colors';
+import { Type } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+chai.use(chaiColors);
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
 // Alternatively, can be defined in cypress/support/component.d.ts
 // with a <reference path="./component" /> at the top of your spec.
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
-      mount: typeof mount
+      mount: typeof mount;
+      mountStandalone: typeof mount;
     }
   }
 }
 
-Cypress.Commands.add('mount', mount)
+const imports = [HttpClientTestingModule];
+
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+function customMount<T>(component: string | Type<T>, config?: MountConfig<T>) {
+  if (!config) {
+    config = { imports };
+  } else {
+    config.imports = [...(config?.imports || []), ...imports];
+  }
+  return mount<T>(component, config);
+}
+
+Cypress.Commands.add('mount', mount);
+Cypress.Commands.add('mountStandalone', customMount);
 
 // Example use:
 // cy.mount(MyComponent)

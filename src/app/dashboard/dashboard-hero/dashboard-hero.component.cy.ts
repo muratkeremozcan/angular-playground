@@ -8,18 +8,14 @@ const mockHero: Hero = {
 
 describe('Dashboard Hero Component', () => {
   it('should initialize properly with no input properties', () => {
-    cy.mount(DashboardHeroComponent, {
-      imports: [DashboardHeroComponent]
-    });
+    cy.mount(DashboardHeroComponent);
   });
 
   it('should display a hero name when provided via input', () => {
-    cy.mount(DashboardHeroComponent, {
-      imports: [DashboardHeroComponent]
-    }).then((wrapper) => {
+    cy.mount(DashboardHeroComponent).then((wrapper) => {
       wrapper.component.hero = mockHero;
       wrapper.fixture.detectChanges();
-      return cy.wrap(wrapper).as('angular');
+      return cy.wrap(wrapper);
     });
 
     cy.get('[data-cy="hero"]').should('have.text', 'NEW HERO NAME');
@@ -36,7 +32,7 @@ describe('Dashboard Hero Component', () => {
     }).then((wrapper) => {
       wrapper.component.hero = mockHero;
       wrapper.fixture.detectChanges();
-      return cy.wrap(wrapper).as('angular');
+      return cy.wrap(wrapper);
     });
 
     cy.get('[data-cy="hero"]').click();

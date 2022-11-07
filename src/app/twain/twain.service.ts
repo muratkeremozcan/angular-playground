@@ -6,23 +6,18 @@ import { Observable, throwError, Observer } from 'rxjs';
 import { concat, map, retryWhen, switchMap, take } from 'rxjs/operators';
 
 import { Quote } from './quote';
+import { QuoteServiceModel } from './quote.service.model';
 
 @Injectable()
-export class TwainService {
+export class TwainService implements QuoteServiceModel {
   private nextId = 1;
 
   constructor(private http: HttpClient) {}
 
   getQuote(): Observable<string> {
     return new Observable((observer: Observer<number>) => observer.next(this.nextId++)).pipe(
-      // tap((id: number) => console.log(id)),
-      // tap((id: number) => { throw new Error('Simulated server error'); }),
-
       switchMap((id: number) => this.http.get<Quote>(`api/quotes/${id}`)),
-      // tap((q : Quote) => console.log(q)),
       map((q: Quote) => q.quote),
-
-      // `errors` is observable of http.get errors
       retryWhen((errors) =>
         errors.pipe(
           switchMap((error: HttpErrorResponse) => {

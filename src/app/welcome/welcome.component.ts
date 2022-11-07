@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../model';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   standalone: true,
   selector: 'app-welcome',
-  template: '<h3 class="welcome"><i>{{welcome}}</i></h3>'
+  imports: [NavBarComponent],
+  template: `<div style="display: flex; justify-content: space-between">
+    <h3 class="welcome">
+      <i>{{ welcome }}</i>
+    </h3>
+    <nav-bar></nav-bar>
+  </div>
+  `
 })
 export class WelcomeComponent implements OnInit {
   welcome: string;

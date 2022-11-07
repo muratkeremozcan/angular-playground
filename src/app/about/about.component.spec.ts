@@ -1,32 +1,30 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
 import { AboutComponent } from './about.component';
-import { HighlightDirective } from '../directives/highlight.directive';
-import { TwainComponent } from '../twain/twain.component';
-import { MockComponent } from 'ng-mocks';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-// [8] testing directives, very similar to testing components [1]
-// use NO_ERRORS_SCHEMA (8.1)
-// you may need to cast selectors as HTMLElement, instead of the default Element (8.2)
-
-xdescribe('[7] Testing directives: very similar to components', () => {
+describe('About Component', () => {
   let component: AboutComponent;
-  let spectator: Spectator<AboutComponent>;
+  let fixture: ComponentFixture<AboutComponent>;
 
-  const createComponent = createComponentFactory({
-    component: AboutComponent,
-    imports: [HighlightDirective],
-    mocks: [MockComponent(TwainComponent)]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AboutComponent, HttpClientTestingModule]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(AboutComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  beforeEach(() => {
-    spectator = createComponent();
-    component = spectator.component;
+  it('Loads with a title and highlight', () => {
+    const title: HTMLElement = fixture.debugElement.query(By.css('[data-cy=page-title]')).nativeElement;
+    expect(title.innerText).toBe('About');
+    expect(title.style.backgroundColor).toBe('skyblue');
   });
 
-  it('Use NO_ERRORS_SCHEMA and may need to cast selectors as HTMLElement', () => {
-    // (8.2) IMPORTANT: you may need to cast selectors as HTMLElement, instead of the default Element
-    const h2: HTMLElement = spectator.query('h2');
-    expect(h2).toBeTruthy();
-    expect(h2.style.backgroundColor).toBe('skyblue');
+  it('should have an h3 element that reads "Quote of the day:"', () => {
+    const h3: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement;
+    expect(h3.innerText).toBe('Quote of the day:');
   });
 });
