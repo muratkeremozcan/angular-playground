@@ -11,7 +11,7 @@ import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 export class HighlightDirective implements OnChanges {
   @Input('highlight') bgColor: string;
 
-  defaultColor = 'rgb(211, 211, 211)'; // lightgray
+  defaultColor = 'lightgrey';
 
   constructor(private el: ElementRef) {
     el.nativeElement.style.customProperty = true;

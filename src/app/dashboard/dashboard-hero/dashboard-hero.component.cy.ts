@@ -3,36 +3,33 @@ import { Hero } from '../../model';
 
 const mockHero: Hero = {
   id: 42,
-  name: 'new hero name'
+  name: 'Flash'
 };
 
 describe('Dashboard Hero Component', () => {
-  it('should initialize properly with no input properties', () => {
-    cy.mount(DashboardHeroComponent);
-  });
-
-  it('should display a hero name when provided via input', () => {
-    cy.mount(DashboardHeroComponent).then((wrapper) => {
-      wrapper.component.hero = mockHero;
-      wrapper.fixture.detectChanges();
-      return cy.wrap(wrapper);
+  it('should display a hero name when provided via Input', () => {
+    cy.mount(DashboardHeroComponent, {
+      componentProperties: {
+        hero: mockHero
+      }
     });
 
-    cy.get('[data-cy="hero"]').should('have.text', 'NEW HERO NAME');
+    cy.get('[data-cy="hero"]').should('have.text', 'FLASH');
   });
+
+  /**
+   * 9. Stubbing outputs
+   * Cypress gives you the ability to just use autoSpyOutputs. They use
+   * whatever the name of the property with spy appended. Otherwise, you can
+   * just pass the output property and use createOutputSpy<T>.
+   */
 
   it('should emit the selected hero to the consumer when clicked', () => {
     cy.mount(DashboardHeroComponent, {
       componentProperties: {
-        selected: {
-          emit: cy.spy().as('selectedSpy')
-        } as any
+        hero: mockHero
       },
-      imports: [DashboardHeroComponent]
-    }).then((wrapper) => {
-      wrapper.component.hero = mockHero;
-      wrapper.fixture.detectChanges();
-      return cy.wrap(wrapper);
+      autoSpyOutputs: true
     });
 
     cy.get('[data-cy="hero"]').click();

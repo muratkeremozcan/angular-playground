@@ -1,10 +1,17 @@
 module.exports = {
-  semi: true,
-  trailingComma: 'none',
-  singleQuote: true,
-  printWidth: 120,
-  tabWidth: 2,
-  endOfLine: 'auto',
-  bracketSpacing: true,
-  parser: 'typescript'
+  "arrowParens": "avoid",
+  "bracketSpacing": false,
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "insertPragma": false,
+  "jsxSingleQuote": false,
+  "printWidth": 80,
+  "proseWrap": "always",
+  "quoteProps": "as-needed",
+  "requirePragma": false,
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false
 };

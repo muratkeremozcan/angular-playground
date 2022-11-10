@@ -35,7 +35,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       mount: typeof mount;
-      mountStandalone: typeof mount;
+      mountWithHttp: typeof mount;
     }
   }
 }
@@ -53,7 +53,7 @@ function customMount<T>(component: string | Type<T>, config?: MountConfig<T>) {
 }
 
 Cypress.Commands.add('mount', mount);
-Cypress.Commands.add('mountStandalone', customMount);
+Cypress.Commands.add('mountWithHttp', customMount);
 
 // Example use:
 // cy.mount(MyComponent)

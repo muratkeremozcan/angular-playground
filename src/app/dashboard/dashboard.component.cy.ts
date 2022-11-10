@@ -17,7 +17,7 @@ describe('Dashboard Component', () => {
     cy.get('[data-cy="page-title"]')
       .should('have.text', 'No Heroes')
       .should('have.css', 'background-color')
-      .and('eq', 'rgb(211, 211, 211)');
+      .and('be.colored', 'lightgrey');
   });
 
   it('should show the top heroes after OnInit', () => {
