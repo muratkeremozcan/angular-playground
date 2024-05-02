@@ -5,7 +5,7 @@ variables:
 # these are properties that are common in every Cypress job
 .branch_template: &common
   image:
-    name: cypress/included:10.7.0
+    name: cypress/included:10.11.0
     entrypoint: [""]
   artifacts:
     expire_in: 1 week
